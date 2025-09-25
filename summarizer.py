@@ -1,7 +1,7 @@
 import google.generativeai as genai   # type: ignore
   
 # Configure the API key  
-genai.configure(api_key="AIzaSyCASJRVu3CLx3aEzezAgMO9FaX9PleZcto")  
+genai.configure(api_key="{YOUR-API-KEY}")  
   
 # Initialize the GenerativeModel with the model name as a positional argument  
 model = genai.GenerativeModel("models/gemma-3-1b-it")  
@@ -25,3 +25,4 @@ def summary(email_text):
     reply = model.generate_content(reply_prompt).text
 
     return [summary, reply]
+
