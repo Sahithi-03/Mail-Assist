@@ -10,8 +10,9 @@
 - Generate a context-aware draft reply in the same tone as the original email
 - Uses **Google gemma-3-1b-it** for AI-powered text generation
 
-![alt text](https://github.com/Sahithi-03/Mail-Assist/blob/main/Screenshot%202025-09-25%20130632.png)
+[Video Link](https://youtu.be/lYmFTajmfjY)
 
+![alt text](https://github.com/Sahithi-03/Mail-Assist/blob/main/Screenshot%202025-09-25%20130632.png)
 
 
 ---
