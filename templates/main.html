@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Website</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    </head>
+    <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1 font-monospace">Mail Assist</span>
+            </div>
+        </nav>
+    <body class="bg bg-secondary">
+        
+        <div class="container text-center">
+            <h3 class="font-monospace m-3">Email Assistant</h3>
+            <div class="d-flex flex-row justify-content-center">
+                <p class="fst-italic h5 p-2">Paste the mail in the textbox to get the summary and sample reply.</p>
+                <div class="p-2">
+                <a class="btn btn-outline-dark font-monospace" id="sub" href="#">Submit</a>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <textarea class="font-monospace form-control h-75 w-50" rows="10" autofocus placeholder="Paste here ..." id="mail"></textarea>
+            </div>
+            <div id="res" class="p-2 m-3">
+                
+            </div>
+        </div>
+    </body>
+    <script>
+        const sub = document.getElementById('sub');
+        const res = document.getElementById('res');
+        res.style.display = 'none';
+        sub.addEventListener('click', () => {
+            const txt = document.getElementById('mail');
+            if (txt.value === '') {
+                alert('Please paste or type the mail');
+            } else {
+                res.style.display = 'block';
+                const mail = {
+                    body : txt.value
+                };
+                fetch('http://127.0.0.1:8000/summary/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(mail)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    res.innerHTML = 
+                    `<div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Summary:</h5>
+                                    <p>${data.result}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Reply:</h5>
+                                        <p>${data.result0}</p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>`
+                    console.log(data);
+                }
+                );
+            } 
+        });
+    </script>
+</html>
